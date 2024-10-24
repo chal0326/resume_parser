@@ -40,11 +40,7 @@ export function ResumeParser() {
 
   return (
     <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="glass-card"
-      >
+      
         <form onSubmit={handleSubmit}>
           <textarea
             className="glass-input min-h-[200px]"
@@ -61,7 +57,6 @@ export function ResumeParser() {
             {isLoading ? 'Parsing...' : 'Parse Resume'}
           </button>
         </form>
-      </motion.div>
 
       {parsedData && <ParsedResumeDisplay data={parsedData} />}
     </div>

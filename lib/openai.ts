@@ -34,5 +34,9 @@ export async function parseResume(text: string): Promise<ParsedResume> {
     temperature: 0.3,
   });
 
-  return JSON.parse(response.choices[0].message.content) as ParsedResume;
-}</content>
+  const content = response.choices[0].message.content;
+  if (!content) {
+    throw new Error("Response content is null or undefined");
+  }
+  return JSON.parse(content) as ParsedResume;
+}
