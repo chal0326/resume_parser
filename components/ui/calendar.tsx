@@ -1,13 +1,31 @@
-'use client';
-
 import * as React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { DayPicker } from 'react-day-picker';
-
+import { DayPicker, NavProps } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
+function CustomNavigation({ onPreviousClick, onNextClick }: NavProps) {
+  return (
+    <div className="space-x-1 flex items-center">
+      <button
+        type="button"
+        onClick={onPreviousClick} // Corrected property
+        className="absolute left-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+      <button
+        type="button"
+        onClick={onNextClick} // Corrected property
+        className="absolute right-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
 
 function Calendar({
   className,
@@ -54,8 +72,7 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
-        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
+        Nav: CustomNavigation, // Use the custom navigation component here
       }}
       {...props}
     />
